@@ -69,4 +69,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Comment');
     }
+
+    public function isAdministrator()
+    {
+        return $this->getAttribute('is_admin');
+    }
 }
