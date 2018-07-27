@@ -1,0 +1,29 @@
+.header-review {
+    font-size: 1.5em;
+    color: #E25D33
+}
+
+.display-none {
+    display: none;
+}
+
+.avartar {
+    margin-bottom: .5em;
+}
+
+.reply {
+    margin-left: 10em;
+}
+
+fieldset {
+    border: 1px solid #b9bbbe;
+    padding: 1em;
+}
+
+.legend-comment {
+    font-size: 1em
+}
+
+btn-post {
+    margin-top: .5em
+}

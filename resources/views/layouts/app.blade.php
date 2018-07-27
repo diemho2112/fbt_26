@@ -8,7 +8,6 @@
     <title>@lang('message.title')</title>
     {{ Html::style(asset('css/app.css')) }}
     {{ Html::style(asset('css/all.css')) }}
-    {{ Html::style(asset('css/main3.css')) }}
     {{ Html::style(asset('css/font-awesome.css')) }}
 </head>
 <body>
@@ -64,6 +63,6 @@
     {{ Html::script(asset('js/home.js')) }}
     {{ Html::script(asset('js/tour.js')) }}
     {{ Html::script(asset('js/booking.js')) }}
-{{--    {{ Html::script(asset('js/review.js')) }}--}}
+    {{--{{ Html::script(asset('js/review.js')) }}--}}
 </body>
 </html>

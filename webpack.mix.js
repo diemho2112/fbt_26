@@ -25,6 +25,7 @@ mix.styles([
     'resources/assets/css/main.css',
     'resources/assets/css/main2.css',
     'resources/assets/css/main3.css',
+    'resources/assets/css/review.css'
 ], 'public/css/all.css');
 mix.styles([
     'resources/assets/css/admin.css',

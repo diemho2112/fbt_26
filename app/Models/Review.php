@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Review extends Model
 {
@@ -10,6 +11,7 @@ class Review extends Model
         'user_id',
         'tour_id',
         'content',
+        'title'
     ];
 
     public function tour()
@@ -30,5 +32,27 @@ class Review extends Model
     public function comments()
     {
         return $this->morphMany('App\Models\Comment', 'commented');
+    }
+
+    public function getLikedByAuthUserAttribute()
+    {
+        $user_id = Auth::id();
+        $like = Like::where('user_id', $user_id)
+            ->where('review_id', $this->id)
+            ->first();
+        if ($like) {
+            if ($like->is_disliked) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function getReviewedByAuthUserAttribute()
+    {
+        return $this->user->id === Auth::id();
     }
 }

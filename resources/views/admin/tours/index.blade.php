@@ -45,7 +45,7 @@
                     <td>{{ $tour->price }}</td>
                     <td>{{ $tour->description }}</td>
                     <td>
-                        {!! Html::image(asset('upload/'. $tour->image), trans('message.image')) !!}
+                        {!! Html::image(($tour->is_upload_image) ? asset('upload/' . $tour->image) : $tour->image, trans('message.image')) !!}
                     </td>
                     <td>
                         {!! Form::open(['route' => ['tour.destroy', $tour->id], 'method' => 'delete']) !!}

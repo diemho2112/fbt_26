@@ -13,7 +13,7 @@ class BookingPolicy
     /**
      * Create a new policy instance.
      *
-     * @return void
+     * @return bool
      */
     public function matchUser(User $user, Booking $booking)
     {

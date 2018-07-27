@@ -117,4 +117,17 @@ return [
     'duration-numeric' => 'The duration field must be a numer',
     'image-image' => 'The image field must a image',
     'not-admin' => 'You are not the admin',
+    'review-title' => 'Your Title',
+    'review-success' => 'Review successfully',
+    'leave-review' => 'Leave your review',
+    'leave-rate' => 'Rate this tour',
+    'passenger-review' => 'Passenger Reviews',
+    'review-by' => 'Reviewed by',
+    'comment-by' => 'Commented by',
+    'post' => 'Post',
+    'like' => 'You liked this review',
+    'relike' => 'You liked this review again',
+    'unlike' => 'You unliked this review',
+    'login-to-like' => 'Please login to like this review!',
+    'passengers-booking' => 'Number of passengers'
 ];

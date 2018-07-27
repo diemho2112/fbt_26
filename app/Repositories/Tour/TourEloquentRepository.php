@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Tour;
 use App\Repositories\EloquentRepository;
 use Illuminate\Support\Facades\Redirect;
+use App\Models\Review;
 
 class TourEloquentRepository extends EloquentRepository implements TourRepositoryInterface
 {
@@ -51,7 +52,7 @@ class TourEloquentRepository extends EloquentRepository implements TourRepositor
 
     public function getReviews(Tour $tour)
     {
-        return $tour->reviews;
+        return $tour->reviews()->latest('created_at')->get();
     }
 
     public function rate(User $user, $id, $arrtribute)
@@ -102,7 +103,7 @@ class TourEloquentRepository extends EloquentRepository implements TourRepositor
     {
         $fileExtension = $image->getClientOriginalExtension();
         $fileName = time() . '.' . $fileExtension;
-        $image->move(public_path('upload'), $fileName);
+        $image->move(public_path(config('setting.image-folder')), $fileName);
         $tour['image'] = $fileName;
 
         return Tour::create($tour);
@@ -117,7 +118,7 @@ class TourEloquentRepository extends EloquentRepository implements TourRepositor
     {
         $fileExtension = $image->getClientOriginalExtension();
         $fileName = time() . '.' . $fileExtension;
-        $image->move(public_path('upload'), $fileName);
+        $image->move(public_path(config('setting.image-folder')), $fileName);
         $tour['image'] = $fileName;
 
         return $this->update($id, $tour);

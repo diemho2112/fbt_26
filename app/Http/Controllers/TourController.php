@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreReview;
 use App\Models\Rating;
-use App\Models\Review;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use App\Models\Tour;
@@ -58,27 +56,6 @@ class TourController extends Controller
             }
         } else {
             Session::flash('error_rate', trans('message.must-book-to-rate'));
-        }
-
-        return Redirect::back();
-    }
-
-    public function review(StoreReview $request, $id)
-    {
-        $tour = $this->tourRepository->find($id);
-        if (Gate::allows('assess', $tour)) {
-            $oldReview = Review::where('user_id', $request->user())
-                ->where('tour_id', $id)->get();
-            if (!$oldReview) {
-                $review = $request->only([
-                    'content',
-                ]);
-                $this->tourRepository->review($request->user(), $id, $review);
-            } else {
-                Session::flash('error_review', trans('message.already-review'));
-            }
-        } else {
-            Session::flash('error_review', trans('message.must-book-to-review'));
         }
 
         return Redirect::back();
