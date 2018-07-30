@@ -16,12 +16,17 @@ mix.js('resources/assets/js/app.js', 'public/js')
     .copy('node_modules/font-awesome/fonts/', 'public/fonts')
     .sass('node_modules/font-awesome/scss/font-awesome.scss', 'public/css')
     .version();
-mix.js('resources/assets/js/home.js', 'public/js/home.js')
-mix.js('resources/assets/js/tour.js', 'public/js/tour.js')
-mix.js('resources/assets/js/booking.js', 'public/js/booking.js')
+mix.js('resources/assets/js/home.js', 'public/js/home.js');
+mix.js('resources/assets/js/tour.js', 'public/js/tour.js');
+mix.js('resources/assets/js/booking.js', 'public/js/booking.js');
+mix.js('resources/assets/js/review.js', 'public/js/review.js');
+mix.js('resources/assets/js/admin.js', 'public/js/admin.js');
 mix.styles([
     'resources/assets/css/main.css',
     'resources/assets/css/main2.css',
     'resources/assets/css/main3.css',
 ], 'public/css/all.css');
+mix.styles([
+    'resources/assets/css/admin.css',
+], 'public/css/admin.css');
 mix.copyDirectory('resources/assets/img', 'public/img');
