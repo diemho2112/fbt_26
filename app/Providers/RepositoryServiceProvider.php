@@ -37,5 +37,10 @@ class RepositoryServiceProvider extends ServiceProvider
             'App\Repositories\Tour\TourRepositoryInterface',
             'App\Repositories\Tour\TourEloquentRepository'
         );
+
+        $this->app->bind(
+            'App\Repositories\Review\ReviewRepositoryInterface',
+            'App\Repositories\Review\ReviewEloquentRepository'
+        );
     }
 }

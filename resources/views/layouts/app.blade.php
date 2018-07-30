@@ -8,7 +8,6 @@
     <title>@lang('message.title')</title>
     {{ Html::style(asset('css/app.css')) }}
     {{ Html::style(asset('css/all.css')) }}
-    {{ Html::style(asset('css/main3.css')) }}
     {{ Html::style(asset('css/font-awesome.css')) }}
 </head>
 <body>
@@ -46,6 +45,9 @@
                                     <a class="dropdown-item" href="{{ route('booking.index') }}">
                                         @lang('message.mytravel')
                                     </a>
+                                    <a class="dropdown-item" href="{{ route('review.index') }}">
+                                        @lang('message.myreview')
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}" id="logout">
                                         @lang('message.logout')
                                     </a>
@@ -60,10 +62,11 @@
         </nav>
         @yield('content')
     </div>
+    @routes()
     {{ Html::script(asset('js/app.js')) }}
     {{ Html::script(asset('js/home.js')) }}
     {{ Html::script(asset('js/tour.js')) }}
     {{ Html::script(asset('js/booking.js')) }}
-{{--    {{ Html::script(asset('js/review.js')) }}--}}
+    {{ Html::script(asset('js/review.js')) }}
 </body>
 </html>
