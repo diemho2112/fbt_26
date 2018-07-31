@@ -45,6 +45,10 @@ Route::resource('tour.booking', 'TourBookingController')->only('store');
 
 Route::resource('booking', 'BookingController')->except('store', 'show');
 
+Route::resource('review', 'ReviewController');
+
+Route::post('/comment', 'ReviewController@comment')->name('comment');
+
 Route::get('/login/{social}', 'Auth\LoginController@redirectToProvider')->name('social-login');
 
 Route::get('/login/{social}/callback', 'Auth\LoginController@handleProviderCallback');
@@ -55,10 +59,8 @@ Route::post('booking/{id}/cancel', 'BookingController@cancel')->name('booking.ca
 Route::get('/cancel', 'BookingController@canceledList')->name('booking.cancelList');
 Route::post('/booking/{id}/restore', 'BookingController@restore')->name('booking.restore');
 Route::post('/tour/search', 'TourController@search')->name('tour.search');
-Route::post('/tour/{id}/rate', 'TourController@rate')->name('tour.rate');
-Route::get('/review/{id}/like', 'LikeController@like')->name('like');
-Route::get('/review/{id}/dislike', 'LikeController@dislike')->name('dislike');
-Route::post('/tour/{id}/review', 'TourController@review')->name('tour.review');
+Route::post('/tour/rate', 'TourController@rate')->name('tour.rate');
+Route::post('/review/like', 'ReviewController@like')->name('like');
 Route::get('/latest', 'TourController@showLatestTours')->name('tour.latest');
 Route::get('/best', 'TourController@showBestTours')->name('tour.best');
 Route::get('/popular', 'TourController@showPopularTours')->name('tour.popular');

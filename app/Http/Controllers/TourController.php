@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreReview;
+use App\Models\Comment;
 use App\Models\Rating;
 use App\Models\Review;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use App\Models\Tour;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Session;
 use App\Repositories\Tour\TourRepositoryInterface;
 
@@ -45,43 +47,28 @@ class TourController extends Controller
         return view('tours.show', compact('tour', 'activities', 'packages', 'packagesList', 'average_rating', 'total_reviews', 'reviews'));
     }
 
-    public function rate(Request $request, $id)
+    public function rate(Request $request)
     {
-        $tour = $this->tourRepository->find($id);
-        if (Gate::allows('assess', $tour)) {
-            $oldRate = Rating::where('user_id', $request->user())
-                ->where('tour_id', $id)->get();
-            if (!$oldRate) {
-                $this->tourRepository->rate($request->user(), $id, $request->star);
+        if ($request->ajax()) {
+            $tourId = $request->tourId;
+            $tour = $this->tourRepository->find($tourId);
+            if (Gate::allows('assess', $tour)) {
+                $oldRate = Rating::where('user_id', Auth::id())
+                    ->where('tour_id', $tourId)->first();
+                if (!$oldRate) {
+                    $this->tourRepository->rate($request->user(), $tourId, $request->rate);
+                    $message = trans('message.rate-success');
+                } else {
+                    $message = trans('message.already-rate');
+                }
             } else {
-                Session::flash('error_rate', trans('message.already-rate'));
+                $message = trans('message.must-book-to-rate');
             }
-        } else {
-            Session::flash('error_rate', trans('message.must-book-to-rate'));
+
+            return Response::json([
+                'message' => $message
+            ]);
         }
-
-        return Redirect::back();
-    }
-
-    public function review(StoreReview $request, $id)
-    {
-        $tour = $this->tourRepository->find($id);
-        if (Gate::allows('assess', $tour)) {
-            $oldReview = Review::where('user_id', $request->user())
-                ->where('tour_id', $id)->get();
-            if (!$oldReview) {
-                $review = $request->only([
-                    'content',
-                ]);
-                $this->tourRepository->review($request->user(), $id, $review);
-            } else {
-                Session::flash('error_review', trans('message.already-review'));
-            }
-        } else {
-            Session::flash('error_review', trans('message.must-book-to-review'));
-        }
-
-        return Redirect::back();
     }
 
     public function showLatestTours(Request $request)
@@ -116,6 +103,7 @@ class TourController extends Controller
         if (!$tours) {
             Session::flash('no_tours', trans('message.no-results'));
         }
+
         return view('home', compact('tours'));
     }
 }

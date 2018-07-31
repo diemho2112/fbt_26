@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Tour extends Model
 {
@@ -69,5 +70,22 @@ class Tour extends Model
     public function scopeOrSearch($query, $column, $operator = '=', $value = null)
     {
         $query->search($column, $operator, $value, 'or');
+    }
+
+    public function getIsUploadImageAttribute()
+    {
+        return file_exists(public_path().'/upload/' . $this->image);
+    }
+
+    public function getReviewedByAuthUserAttribute()
+    {
+        $review = Review::where('user_id', Auth::id())
+            ->where('tour_id', $this->id)
+            ->first();
+        if ($review) {
+            return true;
+        }
+
+        return false;
     }
 }
