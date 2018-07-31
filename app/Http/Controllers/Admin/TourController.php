@@ -93,9 +93,11 @@ class TourController extends Controller
 
     public function showRevenue()
     {
-        $tours = $this->tourRepository->revenue(Carbon::now()->month, Carbon::now()->year);
+        $nowMonth = Carbon::now()->month;
+        $nowYear = Carbon::now()->year;
+        $tours = $this->tourRepository->revenue($nowMonth, $nowYear);
 
-        return view('admin.revenue', compact('tours'));
+        return view('admin.revenue', compact('tours', 'nowMonth', 'nowYear'));
     }
 
     public function revenueByMonth(Request $request)

@@ -82,6 +82,7 @@ $factory->define(App\Models\Review::class, function (Faker $faker) {
     return [
         'user_id' => App\Models\User::all('id')->random(),
         'tour_id' => App\Models\Tour::all('id')->random(),
+        'title' => $faker->text,
         'content' => $faker->paragraph,
     ];
 });
@@ -98,8 +99,8 @@ $factory->define(App\Models\Comment::class, function (Faker $faker) {
     return [
         'user_id' => App\Models\User::all('id')->random(),
         'content' => $faker->paragraph,
-        'commented_id' => App\Models\Review::all('id')->random(),
-        'commented_type' => 'review',
+        'commentable_id' => App\Models\Review::all('id')->random(),
+        'commentable_type' => 'reviews',
     ];
 });
 
@@ -107,7 +108,7 @@ $factory->defineAs(App\Models\Comment::class, 'reply', function ($faker) use ($f
     $user = $factory->raw('App\Models\Comment');
 
     return array_merge($user, [
-        'commented_id' => App\Models\Comment::all('id')->random(),
-        'commented_type' => 'comment',
+        'commentable_id' => App\Models\Comment::all('id')->random(),
+        'commentable_type' => 'comments',
     ]);
 });

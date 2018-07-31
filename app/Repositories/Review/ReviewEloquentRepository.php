@@ -76,7 +76,8 @@ class ReviewEloquentRepository extends EloquentRepository implements ReviewRepos
         return $user->reviews()->latest()->get();
     }
 
-    public function comment(User $user,array $comment)
+
+    public function comment(User $user, array $comment)
     {
         return $user->comments()->create($comment);
     }

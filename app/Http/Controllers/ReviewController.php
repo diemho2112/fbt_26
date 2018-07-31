@@ -126,11 +126,13 @@ class ReviewController extends Controller
                 'commentable_type',
                 'commentable_id'
             ]);
+            $time = Carbon::now()->toDateTimeString();
             $this->reviewRepository->comment(Auth::user(), $comment);
             $response = [
                 'content' => $request->content,
                 'username' => Auth::user()->name,
-                'message' => 'You commented succcessfully'
+                'message' => trans('message.comment-success'),
+                'time' => $time,
             ];
 
             return Response::json($response);

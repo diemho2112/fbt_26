@@ -11,8 +11,8 @@
             </div>
             <div class="row">
                 {!! Form::open(['route' => 'revenue.month' ]) !!}
-                {!! Form::selectMonth('month') !!}
-                {!! Form::selectYear('year', 2014, 2020) !!}
+                {!! Form::selectMonth('month', $nowMonth) !!}
+                {!! Form::selectYear('year', $nowYear, 2014, 2020) !!}
                 {!! Form::submit(trans('message.select'), ['class' => 'btn btn-primary']) !!}
                 {!! Form::close() !!}
             </div>
