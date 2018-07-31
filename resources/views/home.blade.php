@@ -5,7 +5,6 @@
     <div class="row content">
         @include('layouts.sidebar')
         <div class="col-sm-9">
-            <div class="alert alert-info">{{ session('no_tours') }}</div>
             <div class="row content" id="list-tours">
                 @foreach ($tours as $tour)
                     <div class="col-sm-5 tour" >
@@ -14,7 +13,7 @@
                                 {!! $tour->name !!}
                             </div>
                             <div class="panel-body">
-                                {!! Html::image($tour->image,'Image', ['class' => 'responsive']) !!}
+                                {!! Html::image(($tour->is_upload_image) ? asset('upload/' . $tour->image) : $tour->image, trans('message.image'), ['class' => 'responsive']) !!}
                             </div>
                             <div class="panel-footer">
                                 <p>@lang('message.from') <span class="price">{{ $tour->price }}</span></p>

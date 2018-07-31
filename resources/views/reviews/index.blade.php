@@ -54,7 +54,8 @@
                 <div class="container row box-review">
                     <div class="col-md-1">
                         {{ Html::image(asset('img/214280-200.png'), trans('message.image'), ['class' => 'justify-content-center avartar']) }}
-                        <span id="like-count{{ $review->id }}" data="{{ count($review->likes) }}">{{ count($review->likes) }} <i class="fa fa-thumbs-up"></i></span>
+                        <span id="like-count{{ $review->id }}" data="{{ count($review->likes) }}">{{ count($review->likes) }} </span>
+                        <i class="fa fa-thumbs-up"></i>
                         <span>{{ count($review->comments) }} <i class="fa fa-comment"></i></span>
                     </div>
                     <div class="col-md-11">
@@ -94,6 +95,14 @@
                     </div>
                     @endif
                     <div class="all-comment{{ $review->id }} display-none container row">
+                        <div class="row new-comment display-none">
+                            <div class="container box-review">
+                                <p>@lang('message.comment-by'): <span id="comment-user"></span></p>
+                                <p id="comment-content"></p>
+                                <a class="reply-a" href='javascript:void(0)'>@lang('message.reply')</a>
+                                <span class="time-right" id="comment-time"></span>
+                            </div>
+                        </div>
                         @foreach($review->comments as $comment)
                             <div class="row">
                                 <div class="container box-review">
