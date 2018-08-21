@@ -7,5 +7,10 @@ return [
     'yes' => 1,
     'image-folder' => 'upload',
     'increase' => 1,
-    'decrease' => -1
+    'decrease' => -1,
+    'booking' => [
+        'accept' => 'acceptBooking',
+        'reject' => 'rejectBooking',
+        'new' => 'newBooking',
+    ]
 ];

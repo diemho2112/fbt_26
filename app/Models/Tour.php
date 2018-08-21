@@ -88,4 +88,9 @@ class Tour extends Model
 
         return false;
     }
+
+    public function getPriceAttribute($value)
+    {
+        $this->attributes['price'] = number_format($value, 2);
+    }
 }
