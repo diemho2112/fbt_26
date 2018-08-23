@@ -20,7 +20,6 @@ class TourController extends Controller
 
     public function __construct(TourRepositoryInterface $tourRepository)
     {
-        $this->middleware('auth')->only('rate', 'review');
         $this->tourRepository = $tourRepository;
     }
 

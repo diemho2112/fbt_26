@@ -33,6 +33,12 @@ return [
         'number-of-seats' => 'Number of seats:'
     ],
     'company' => 'ADP Inc',
-    'address' => '16 Ly Thuong Kiet Street'
-
+    'address' => '16 Ly Thuong Kiet Street',
+    'no-notification' => 'Notifications',
+    'after-user-booking' => 'Your booking is being processed. Please wait for our response',
+    'seats-is-over' => 'Sorry! The number of seats in this tour is over.',
+    'after-accept-successful' => 'This booking has been accepted',
+    'after-accepted-already' => 'This booking has already been accepted by another administrator.',
+    'after-reject-successful' => 'This booking has been rejected',
+    'after-rejected-already' => 'This booking has already been rejected by another administrator.',
 ];

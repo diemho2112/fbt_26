@@ -9,6 +9,17 @@
     {{ Html::style(asset('css/app.css')) }}
     {{ Html::style(asset('css/all.css')) }}
     {{ Html::style(asset('css/font-awesome.css')) }}
+    <script>
+        window.Laravel = <?php echo json_encode([
+            'csrfToken' => csrf_token(),
+        ]); ?>
+    </script>
+
+    @if(!auth()->guest())
+        <script>
+            window.Laravel.userId = <?php echo auth()->user()->id; ?>
+        </script>
+    @endif
 </head>
 <body>
     <div id="app">
@@ -34,6 +45,14 @@
                                 <a class="nav-link" href="{{ route('register') }}">@lang('message.register')</a>
                             </li>
                         @else
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" id="notifications" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    <i class="fa fa-bell"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="notificationsMenu" id="notificationsMenu">
+                                    <li class="dropdown-header">No notifications</li>
+                                </ul>
+                            </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -68,5 +87,7 @@
     {{ Html::script(asset('js/tour.js')) }}
     {{ Html::script(asset('js/booking.js')) }}
     {{ Html::script(asset('js/review.js')) }}
+    {{ Html::script(asset('js/notification.js')) }}
+    {{ Html::script(asset('messages.js')) }}
 </body>
 </html>

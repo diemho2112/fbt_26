@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Repositories\User\UserRepositoryInterface;
+use Auth;
 
 class UserController extends Controller
 {
@@ -12,7 +13,6 @@ class UserController extends Controller
 
     public function __construct(UserRepositoryInterface $userRepository)
     {
-        $this->middleware('auth');
         $this->userRepository = $userRepository;
     }
 
@@ -31,5 +31,10 @@ class UserController extends Controller
         $this->userRepository->update($user->id, $request->all());
 
         return redirect()->route('user.show', $user->id)->with('user', $user);
+    }
+
+    public function notifications()
+    {
+        return Auth::user()->unreadNotifications()->get()->toArray();
     }
 }

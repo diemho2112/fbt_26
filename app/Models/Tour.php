@@ -91,6 +91,14 @@ class Tour extends Model
 
     public function getPriceAttribute($value)
     {
-        $this->attributes['price'] = number_format($value, 2);
+        return number_format($value, 2);
+    }
+
+    public function getEmptySeatsAttribute()
+    {
+        $seatsOfTour = $this->number_of_seats;
+        $bookedSeats = $this->bookings->sum('number_of_passengers');
+
+        return $seatsOfTour - $bookedSeats;
     }
 }

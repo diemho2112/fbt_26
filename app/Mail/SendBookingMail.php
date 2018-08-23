@@ -12,7 +12,7 @@ class SendBookingMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    protected $booking;
+    public $booking;
     protected $type;
 
     public function __construct(Booking $booking, $type)
