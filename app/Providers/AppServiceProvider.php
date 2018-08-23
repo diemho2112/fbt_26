@@ -2,29 +2,23 @@
 
 namespace App\Providers;
 
+use App\Models\Booking;
+use App\Observers\BookingObserver;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
     public function boot()
     {
         Relation::morphMap([
             'reviews' => 'App\Models\Review',
             'comments' => 'App\Models\Comment'
         ]);
+
+        Booking::observe(BookingObserver::class);
     }
 
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
     public function register()
     {
         //

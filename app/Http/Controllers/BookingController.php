@@ -16,7 +16,6 @@ class BookingController extends Controller
 
     public function __construct(BookingRepositoryInterface $bookingRepository, TourRepositoryInterface $tourRepository)
     {
-        $this->middleware('auth');
         $this->bookingRepository = $bookingRepository;
         $this->tourRepository = $tourRepository;
     }

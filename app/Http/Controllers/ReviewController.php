@@ -23,7 +23,6 @@ class ReviewController extends Controller
     {
         $this->tourRepository = $tourRepository;
         $this->reviewRepository = $reviewRepository;
-        $this->middleware('auth');
     }
 
     public function index(Request $request)

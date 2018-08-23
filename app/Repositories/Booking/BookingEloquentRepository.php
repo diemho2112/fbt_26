@@ -6,6 +6,7 @@ use App\Models\Booking;
 use App\Models\Tour;
 use App\Models\User;
 use App\Repositories\EloquentRepository;
+use Illuminate\Support\Facades\Auth;
 
 class BookingEloquentRepository extends EloquentRepository implements BookingRepositoryInterface
 {
@@ -72,14 +73,22 @@ class BookingEloquentRepository extends EloquentRepository implements BookingRep
         }
     }
 
-    public function storeBooking(User $user, $id, array $booking)
+    public function storeBooking($id, $booking)
     {
         $booking['tour_id'] = $id;
-        return $user->bookings()->create($booking);
+
+        return Auth::user()->bookings()->create($booking);
     }
 
     public function getAll()
     {
         return Booking::with(['user', 'tour'])->paginate(config('setting.perpage'));
+    }
+
+    public function accept($booking)
+    {
+        $booking['is_accepted'] = config('setting.yes');
+
+        return $booking->save();
     }
 }

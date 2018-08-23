@@ -19,5 +19,7 @@ interface BookingRepositoryInterface
 
     public function restorecCancel($id);
 
-    public function storeBooking(User $user, $id, array $booking);
+    public function storeBooking($id, $booking);
+
+    public function accept($booking);
 }
