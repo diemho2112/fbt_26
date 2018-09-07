@@ -4,6 +4,9 @@
             <div class="card">
                 <div class="card-header text-center">@lang('message.booking')</div>
                 <div class="card-body">
+                    @if(Session::has('status'))
+                        <p class="alert alert-info">{{ Session::get('status') }}</p>
+                    @endif
                     {!! Form::open(['route' => ['tour.booking.store', $tour->id], 'aria-lable' => trans('message.booking')]) !!}
                         @include('forms.booking')
                         <div class="form-group row mb-0">

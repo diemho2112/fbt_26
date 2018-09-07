@@ -31,11 +31,12 @@ class TourBookingController extends Controller
             if ($request->number_of_passengers <= $tour->empty_seats) {
                 $this->bookingRepository->storeBooking($tourId, $booking);
 
-                return redirect()
+                return redirect()->back()
                     ->with('status', trans('email.after-user-booking'));
             }
 
-            return redirect()->back()->with('status', trans('email.seats-is-over'));
+            return redirect()->back()
+                ->with('status', trans('email.seats-is-over'));
         } catch (Exception $exception) {
             return response()->view('errors.404');
         }

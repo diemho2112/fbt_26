@@ -39,11 +39,19 @@ class TourController extends Controller
         $activities = $this->tourRepository->getActivities($tour);
         $packages = $this->tourRepository->getPackages($tour);
         $packagesList = $this->tourRepository->getPackageList($tour);
-        $average_rating = $this->tourRepository->getRatingAverage($tour);
-        $total_reviews = $this->tourRepository->getReviewTotal($tour);
+        $averageRating = $this->tourRepository->getRatingAverage($tour);
+        $totalReviews = $this->tourRepository->getReviewTotal($tour);
         $reviews = $this->tourRepository->getReviews($tour);
 
-        return view('tours.show', compact('tour', 'activities', 'packages', 'packagesList', 'average_rating', 'total_reviews', 'reviews'));
+        return view('tours.show', compact(
+            'tour',
+            'activities',
+            'packages',
+            'packagesList',
+            'averageRating',
+            'totalReviews',
+            'reviews'
+        ));
     }
 
     public function rate(Request $request)

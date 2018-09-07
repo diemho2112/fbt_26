@@ -12,7 +12,7 @@ class SendBookingMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    protected $booking;
+    public $booking;
     protected $type;
 
     public function __construct(Booking $booking, $type)
@@ -29,7 +29,7 @@ class SendBookingMail extends Mailable
         }
 
         switch ($this->type) {
-            case config('setting.booking.new'):
+            case 'newBooking':
                 return $this->view('emails.booking.request', compact('tour'));
             case config('setting.booking.accept'):
                 return $this->view('emails.booking.accept', compact('tour'));

@@ -7,12 +7,14 @@ use App\Mail\SendBookingMail;
 use App\Models\Booking;
 use App\Notifications\NewBookingRequest;
 use Illuminate\Support\Facades\Mail;
+use App\Models\User;
 
 class BookingObserver
 {
     public function created(Booking $booking)
     {
-        dispatch(new SendBookingRequestMailJob($booking));
+        $admins = User::where('is_admin', config('setting.yes'))->get();
+        Mail::to($admins)->send(new SendBookingMail($booking, 'newBooking'));
         $booker = $booking->user;
         $booker->notify(new NewBookingRequest($booking));
     }

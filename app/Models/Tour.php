@@ -4,9 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use App\Traits\ShowRate;
 
 class Tour extends Model
 {
+    use ShowRate;
+
     protected $fillable = [
         'name',
         'duration',
@@ -72,11 +75,6 @@ class Tour extends Model
         $query->search($column, $operator, $value, 'or');
     }
 
-    public function getIsUploadImageAttribute()
-    {
-        return file_exists(public_path().'/upload/' . $this->image);
-    }
-
     public function getReviewedByAuthUserAttribute()
     {
         $review = Review::where('user_id', Auth::id())
@@ -100,5 +98,10 @@ class Tour extends Model
         $bookedSeats = $this->bookings->sum('number_of_passengers');
 
         return $seatsOfTour - $bookedSeats;
+    }
+
+    public function getImageAttribute($value)
+    {
+        return config('image_path') . $value;
     }
 }

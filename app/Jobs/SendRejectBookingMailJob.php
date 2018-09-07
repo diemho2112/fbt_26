@@ -10,7 +10,6 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Booking;
-use App\Mail\SendRejectBookingMail;
 
 class SendRejectBookingMailJob implements ShouldQueue
 {

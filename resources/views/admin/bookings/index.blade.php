@@ -9,6 +9,9 @@
             <div class="row justify-content-center">
                 <h2>@lang('message.list-of-bookings')</h2>
             </div>
+            @if(Session::has('success'))
+                <p class="alert alert-info">{{ Session::get('success') }}</p>
+            @endif
             <table class="table text-center">
                 <thead class="thead-dark">
                     <tr>

@@ -13,12 +13,14 @@
                                 {!! $tour->name !!}
                             </div>
                             <div class="panel-body">
-                                {!! Html::image(($tour->is_upload_image) ? asset('upload/' . $tour->image) : $tour->image, trans('message.image'), ['class' => 'responsive']) !!}
+                                {!! Html::image(asset($tour->image), trans('message.image'), ['class' => 'responsive']) !!}
                             </div>
                             <div class="panel-footer">
                                 <p>@lang('message.from') <span class="price">{{ $tour->price }}</span></p>
                                 <p>@lang('message.number_of_days'): {{ $tour->duration }}</p>
                                 <p>@lang('message.itinerary'): {{ $tour->itinerary }}</p>
+                                {{ $tour->showRate($tour->ratings->avg('value')) }}
+                                <p>{{ $tour->reviews->count('id') }} @lang('message.review')</p>
                                 {!! Form::open(['route' => ['tour.show', $tour->id], 'method' => 'get', 'class' => 'detail']) !!}
                                     {!! Form::submit(trans('message.view_detail'), ['class' => 'btn btn-primary btn-detail']) !!}
                                 {!! Form::close() !!}

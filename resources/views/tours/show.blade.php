@@ -6,27 +6,15 @@
         @include('layouts.sidebar')
         <div class="col-sm-9">
             <div class="content tour-detail">
-                {!! Html::image(($tour->is_upload_image) ? asset('upload/' . $tour->image) : $tour->image, trans('message.image'), ['class' => 'responsive', 'height' => '500px']) !!}
+                {!! Html::image(asset($tour->image), trans('message.image'), ['class' => 'responsive', 'height' => '500px']) !!}
                 <div class="panel-heading panel-tour">
                     <h1>{{ $tour->name }}</h1>
                     <p>@lang('message.from') <span class="price">{{ $tour->price }} @lang('message.per-person')</span></p>
                     <p>@lang('message.number_of_days') {{ $tour->duration }}</p>
                     <p>@lang('message.itinerary') {{ $tour->itinerary }}</p>
                     <div class="rate">
-                        @for ($i = 0; $i < 5; $i++)
-                            <span class="fa-stack stars">
-                                <i class="fa fa-star fa-stack-1x"></i>
-                                @if($average_rating > 0.5)
-                                    <i class="fa fa-star fa-stack-1x"></i>
-                                @elseif($average_rating < 0.5 && $average_rating > 0)
-                                    <i class="fa fa-star-half-o fa-stack-1x"></i>
-                                @else
-                                    <i class="fa fa-star fa-stack-1x fa-inverse"></i>
-                                @endif
-                                @php $average_rating--; @endphp
-                            </span>
-                        @endfor
-                        <p>{{ $total_reviews }} @lang('message.review')</p>
+                        {{ $tour->showRate($averageRating) }}
+                        <p>{{ $totalReviews }} @lang('message.review')</p>
                     </div>
                 </div>
                 <div class="tab">

@@ -12,5 +12,6 @@ return [
         'accept' => 'acceptBooking',
         'reject' => 'rejectBooking',
         'new' => 'newBooking',
-    ]
+    ],
+    'image_path' => 'upload/'
 ];

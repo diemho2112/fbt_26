@@ -40,5 +40,5 @@ return [
     'after-accept-successful' => 'This booking has been accepted',
     'after-accepted-already' => 'This booking has already been accepted by another administrator.',
     'after-reject-successful' => 'This booking has been rejected',
-    'after-rejected-already' => 'This booking has already been rejected by another administrator.',
+    'after-rejected-already' => 'This booking has already been rejected by you or another administrator.',
 ];
